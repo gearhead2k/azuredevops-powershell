@@ -1,0 +1,19 @@
+{
+    "baseDirectory": "D:\\gittemp\\",
+    "apiUser": "<azure devops user>", 
+    "apiToken": "<azure devops pat",
+    "EndpointUrls": {
+        "projectListEndPoint": "https://dev.azure.com/{organization}/_apis/projects?api-version=6.0&stateFilter=wellFormed",
+        "gitRepoListEndPoint": "https://dev.azure.com/{organization}/{project}/_apis/git/repositories?api-version=6.0",
+        "gitRefListEndPoint": "https://dev.azure.com/{organization}/{project}/_apis/git/repositories/{repositoryId}/refs?api-version=6.0"
+    },
+    "includeBranches":[
+        "master",
+        "main",
+        "dev",
+        "develop"
+    ],
+    "excludeBranches":[
+        "hotfix/*",
+        "feature/*"] 
+}

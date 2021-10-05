@@ -1,1 +1,2 @@
-.config
+src/configfiles/*.json
+!src/configfiles/*sample.json
