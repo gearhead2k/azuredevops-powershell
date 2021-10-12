@@ -22,12 +22,12 @@ function Replace-AzDoUrlParameters {
 
 function Replace-GitUrlWithCreds {
     param(
-        [PSCustomObject]$connectionConfig,
+        [PSCustomObject]$config,
         [string]$Url,
         [string]$Organization
     )
 
-    $gitcred = ("{0}:{1}" -f  [System.Web.HttpUtility]::UrlEncode($connectionConfig.apiUser),$connectionConfig.apiToken)
+    $gitcred = ("{0}:{1}" -f  [System.Web.HttpUtility]::UrlEncode($config.apiUser),$config.apiToken)
     
     $baseUrl = $Url -replace "://$($Organization)@", "://" 
     $gitUrl = $baseUrl -replace "://", ("://{0}@" -f $gitcred)

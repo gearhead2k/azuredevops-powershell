@@ -1,18 +1,18 @@
 function List-AzDoProjects {
     param(
-        [PSCustomObject]$connectionConfig,
+        [PSCustomObject]$config,
         [string]$Organization,
         [string[]]$ProjectsFilter = @(),
         [string[]]$ProjectsExclusionFilter = @()
     )
-    $scriptBase = $connectionConfig.BaseScriptDirectory
+    $scriptBase = $config.BaseScriptDirectory
     . $scriptBase\common\requests\azdo-functions.ps1
     . $scriptBase\common\requests\url-functions.ps1
 
     $replaceValues = New-Object PSObject
     Add-Member -InputObject @replaceValues -MemberType NoteProperty -Name Organization -Value $Organization
-    $projectListEndpoint = Replace-AzDoUrlParameters -Url $connectionConfig.EndpointUrls.projectListEndPoint -Values $replaceValues
-    $apiToken = $connectionConfig.apiToken
+    $projectListEndpoint = Replace-AzDoUrlParameters -Url $config.EndpointUrls.projectListEndPoint -Values $replaceValues
+    $apiToken = $config.apiToken
 
     $projectListRequest = Call-AzDevOps -EndPoint $projectListEndpoint -ApiToken $ApiToken
     if ($projectListRequest.StatusCode -ne 200) {

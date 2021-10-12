@@ -1,5 +1,7 @@
 {
     "baseDirectory": "D:\\gittemp\\",
+    "useProjectInitials": false,
+    "projectInitialLength":20,
     "apiUser": "<azure devops user>", 
     "apiToken": "<azure devops pat",
     "EndpointUrls": {

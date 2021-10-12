@@ -1,6 +1,6 @@
 function List-GitRef {
     param(
-        [PSCustomObject]$connectionConfig,
+        [PSCustomObject]$config,
         [string]$Organization,
         [string]$Project,
         [string]$RepositoryId,
@@ -8,7 +8,7 @@ function List-GitRef {
         [string[]]$ExcludeBranches = @()
     )
 
-    $scriptBase = $connectionConfig.BaseScriptDirectory
+    $scriptBase = $config.BaseScriptDirectory
     . $scriptBase\common\requests\azdo-functions.ps1
     . $scriptBase\common\requests\url-functions.ps1
 
@@ -16,8 +16,8 @@ function List-GitRef {
     Add-Member -InputObject @replaceValues -MemberType NoteProperty -Name Organization -Value $Organization
     Add-Member -InputObject @replaceValues -MemberType NoteProperty -Name Project -Value $Project
     Add-Member -InputObject @replaceValues -MemberType NoteProperty -Name RepositoryId -Value $RepositoryId
-    $gitRepoListEndpoint = Replace-AzDoUrlParameters -Url $connectionConfig.EndpointUrls.gitRefListEndPoint -Values $replaceValues
-    $apiToken = $connectionConfig.apiToken
+    $gitRepoListEndpoint = Replace-AzDoUrlParameters -Url $config.EndpointUrls.gitRefListEndPoint -Values $replaceValues
+    $apiToken = $config.apiToken
 
     $gitRefListRequest = Call-AzDevOps -EndPoint $gitRepoListEndpoint -ApiToken $ApiToken
     if ($gitRefListRequest.StatusCode -ne 200) {
