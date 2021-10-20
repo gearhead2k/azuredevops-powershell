@@ -21,14 +21,14 @@ function Get-IndentedText {
 function Get-FirstLettersOfAllWords {
     param(
         [string]$Text,
-        [string]$SplitSeparator = ""
+        [string]$SplitSeparator = " "
     )
 
     if ($null -eq $Text) {
         Write-Error "Value cannot be null" -ErrorAction Stop
     }
 
-    $values = $Text.Trim().Split($SplitSeparator);
+    $values = ($Text.Trim()) -split $SplitSeparator;
     $tmpValue = ""
 
     if ($values.Length -eq 0) {
